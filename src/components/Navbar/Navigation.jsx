@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import CartWidget from './CartWidget/CartWidget';
 import logo from '../../logoAdamssvg.svg'
 
+
 const Navigation = () => {
   return (
     <Navbar bg="dark" variant='dark' expand="lg">

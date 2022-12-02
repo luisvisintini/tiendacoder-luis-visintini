@@ -2,6 +2,7 @@ import { useState } from "react"
 import { BsCart4 } from "react-icons/bs"
 
 const ItemCount = ({valorInicial, stockInicial, onAdd}) => {
+    console.log(onAdd)
 
     const [contador, setContador] = useState(valorInicial)
 

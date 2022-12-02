@@ -4,10 +4,12 @@ import ItemsListContainer from './components/ItemsListContainer/ItemsListContain
 import Navigation from './components/Navbar/Navigation';
 
 function App() {
-  
+
   const handleOnAdd = (cantidad)=> {
+    
     if (cantidad > 0 ) {
       alert(`agregaste ${cantidad} articulos al carrito`)
+      return
     } else {
       alert('debes agregar al menos 1 articulo')
     }
