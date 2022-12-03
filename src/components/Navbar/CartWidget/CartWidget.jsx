@@ -9,7 +9,6 @@ const CartWidget = () => {
     <Button variant="transparent">
       <BsCart4 size='20px' className='me-2 text-white'/>
       <Badge bg="primary">0</Badge>
-      
     </Button>
     
   )

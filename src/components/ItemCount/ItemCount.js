@@ -28,7 +28,7 @@ const ItemCount = ({valorInicial, stockInicial, onAdd}) => {
     return (
         <div className="container text-center mt-5">
             <h1 className="text-5xl mb-10">Contador Clicks</h1>
-            <h1 className="mb-10 text-3xl">{contador}</h1>
+            <h2 className="mb-10 text-3xl">{contador}</h2>
                 <button 
                         onClick={()=> suma()} 
                         className="btn btn-primary me-2">+</button>

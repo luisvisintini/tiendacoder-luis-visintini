@@ -1,12 +1,11 @@
 import './App.css';
 import ItemCount from './components/ItemCount/ItemCount';
-import ItemsListContainer from './components/ItemsListContainer/ItemsListContainer';
+import LiquidosContainer from './components/LiquidosContainer/LiquidosContainer';
 import Navigation from './components/Navbar/Navigation';
 
 function App() {
 
   const handleOnAdd = (cantidad)=> {
-    
     if (cantidad > 0 ) {
       alert(`agregaste ${cantidad} articulos al carrito`)
       return
@@ -17,7 +16,7 @@ function App() {
   return (
     <div>
       <Navigation/>
-      <ItemsListContainer productos='Nuestros Productos'/>
+      <LiquidosContainer/>
       <ItemCount 
         valorInicial={0}
         stockInicial={5}
