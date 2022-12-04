@@ -3,7 +3,7 @@ import LiquidosList from "../LiquidosList/LiquidosList"
 import { getLiquidos, getLiquidosByMarca } from "../../data/ListDB"
 import { useParams } from "react-router-dom"
 
-const LiquidosContainer = () => {
+const LiquidosContainer = ( {greeting} ) => {
 
   const [liquidos, setLiquidos] = useState([])
   const { marcaId } = useParams()
@@ -31,7 +31,7 @@ const LiquidosContainer = () => {
 
   return (
     <div>
-        <h1 className='text-center mt-5 fw-bold'>Nuestros Productos</h1>
+        <h1 className='text-center mt-5 fw-bold'>{greeting}</h1>
         <LiquidosList liquidos={liquidos}/>
     </div>
   )

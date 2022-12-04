@@ -21,7 +21,7 @@ function App() {
       <BrowserRouter>
       <Navigation/>
         <Routes>
-          <Route path='/' element={<LiquidosContainer/>} />
+          <Route path='/' element={<LiquidosContainer greeting="Nuestros Productos"/>} />
           <Route path='/contacto' element={<Contact/>}/>
           <Route path='/marca/:marcaId' element={<LiquidosContainer/>}/>
           <Route path='/liquido/:liquidoId' element={<LiquidoDetailContainer/>}/>
