@@ -12,7 +12,7 @@ const Liquido = ({liquido}) => {
             <Card.Body>
               <Card.Title>{liquido.nombre}</Card.Title>
               <Card.Text>{liquido.marca}</Card.Text>
-              <Card.Text>{liquido.descripcion}</Card.Text>
+              <Card.Text>{liquido.descripcion.slice(0,40)}...</Card.Text>
               <Card.Text className='fw-bold fs-2'>${liquido.precio}</Card.Text>
               <Button onClick={()=> navigate(`/liquido/${liquido.id}`)} variant="primary">Ver Producto</Button>
             </Card.Body>

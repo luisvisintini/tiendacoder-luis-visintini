@@ -8,14 +8,6 @@ import Navigation from './components/Navbar/Navigation';
 
 function App() {
 
-  const handleOnAdd = (cantidad)=> {
-    if (cantidad > 0 ) {
-      alert(`agregaste ${cantidad} articulos al carrito`)
-      return
-    } else {
-      alert('debes agregar al menos 1 articulo')
-    }
-  }
   return (
     <div>
       <BrowserRouter>
@@ -25,11 +17,7 @@ function App() {
           <Route path='/contacto' element={<Contact/>}/>
           <Route path='/marca/:marcaId' element={<LiquidosContainer/>}/>
           <Route path='/liquido/:liquidoId' element={<LiquidoDetailContainer/>}/>
-          <Route path='/itemcount' element={<ItemCount 
-              valorInicial={0}
-              stockInicial={5}
-              onAdd={handleOnAdd}
-            />}/>
+          
             
         </Routes>
       </BrowserRouter>
