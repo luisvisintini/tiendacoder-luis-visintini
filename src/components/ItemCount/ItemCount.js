@@ -2,7 +2,6 @@ import { useState } from "react"
 import { BsCart4 } from "react-icons/bs"
 
 const ItemCount = ({valorInicial, stockInicial, onAdd}) => {
-    console.log(onAdd)
 
     const [contador, setContador] = useState(valorInicial)
 
@@ -24,17 +23,16 @@ const ItemCount = ({valorInicial, stockInicial, onAdd}) => {
     const reset = ()=> {
         setContador(valorInicial)
     }
-    
+
     return (
         <div className="container text-center mt-5">
-            <h1 className="text-5xl mb-10">Contador Clicks</h1>
-            <h2 className="mb-10 text-3xl">{contador}</h2>
                 <button 
                         onClick={()=> suma()} 
-                        className="btn btn-primary me-2">+</button>
+                        className="btn btn-black">+</button>
+                        <button className="btn btn-tranparent">{contador}</button>
                 <button 
                         onClick={()=> resta()} 
-                        className="btn btn-primary me-2">-</button>
+                        className="btn btn-black me-2">-</button>
                 <div className="mt-3">
                     <button 
                         onClick={()=> reset()} 
