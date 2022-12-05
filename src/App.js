@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Contact from './components/Contact/Contact';
-import ItemCount from './components/ItemCount/ItemCount';
 import LiquidoDetailContainer from './components/LiquidoDetailContainer/LiquidoDetailContainer';
 import LiquidosContainer from './components/LiquidosContainer/LiquidosContainer';
 import Navigation from './components/Navbar/Navigation';
+
 
 function App() {
 
@@ -17,8 +17,6 @@ function App() {
           <Route path='/contacto' element={<Contact/>}/>
           <Route path='/marca/:marcaId' element={<LiquidosContainer/>}/>
           <Route path='/liquido/:liquidoId' element={<LiquidoDetailContainer/>}/>
-          
-            
         </Routes>
       </BrowserRouter>
     </div>

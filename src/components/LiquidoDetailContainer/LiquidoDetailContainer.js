@@ -49,9 +49,9 @@ const LiquidoDetailContainer = () => {
               <h4>${liquido.precio}</h4>
               <p>{liquido.descripcion}</p>
               <div className="action">
-                <ItemCount valorInicial={0}
-                          stockInicial={5}
-                          onAdd={handleOnAdd}/>
+                <ItemCount  valorInicial={0}
+                            stockInicial={5}
+                            onAdd={handleOnAdd}/>
               </div>
             </div>
           </div>

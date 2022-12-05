@@ -7,7 +7,7 @@ const Liquido = ({liquido}) => {
 
   const navigate = useNavigate()
   return (
-          <Card style={{ width: '18rem' }}>
+          <Card className='border-0' style={{ width: '18rem' }}>
             <Card.Img variant="top" src={liquido.imagen} />
             <Card.Body>
               <Card.Title>{liquido.nombre}</Card.Title>
