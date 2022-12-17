@@ -2,8 +2,9 @@ const liquidos = [
     {
         id: '1',
         marca: 'Mvh',
-        imagen: '/Images/liquido1.jpg',
         nombre: 'Almond House',
+        imagen: '/Images/liquido1.jpg',
+        stock: 2,
         precio: 1900,
         descripcion: 'Combinacion de vainillas, cremas, almendras tostadas, avellanas y leche'
     },
@@ -12,6 +13,7 @@ const liquidos = [
         marca: 'Mvh',
         nombre: 'Custard Bomb Lemon',
         imagen: '/Images/liquido8.jpg',
+        stock: 3,
         precio: 1900,
         descripcion: 'Combinación de cremas de vainilla y limón'
     },
@@ -20,6 +22,7 @@ const liquidos = [
         marca: 'Mvh',
         nombre: 'Tasty Donuts',
         imagen: '/Images/liquido9.jpg',
+        stock: 0,
         precio: 1900,
         descripcion: 'Donas con un sutil glaseado de limón.'
     },
@@ -28,6 +31,7 @@ const liquidos = [
         marca: 'Mvh',
         nombre: 'Bonnie Clyde',
         imagen: '/Images/liquido10.jpg',
+        stock: 5,
         precio: 1900,
         descripcion: 'Sandía con un toque de melón fresco'
     },
@@ -36,6 +40,7 @@ const liquidos = [
         marca: 'Shibumi',
         nombre: 'Peach Kaki Candy',
         imagen: '/Images/shibumi18.jpg',
+        stock: 3,
         precio: 2300,
         descripcion: 'Sabores exóticos combinados con maestría por Nachef.mixing. Duraznos dulces y maduros fusionados con Caquis, todo salpicado con gotas de frutas tropicales. Un auténtico Candy!'
     },
@@ -44,6 +49,7 @@ const liquidos = [
         marca: 'Shibumi',
         nombre: 'Sumuji Shake',
         imagen: '/Images/shibumi20.jpg',
+        stock: 0,
         precio: 2300,
         descripcion: 'No es otro Milkshake más de frutilla.  Esta receta creada por el gran Nachef.mixing emplea esencias especiales y desconocidas hasta el momento en nuestro mercado, logrando un blend de frutillas avainilladas sobre una suave y cremosa base llena de contrastes y un dulzor que no empalaga pero satisface a los amantes de lo dulce que buscan algo para vapear todo el día.'
     },
@@ -52,6 +58,7 @@ const liquidos = [
         marca: 'Shibumi',
         nombre: 'Cherry Pop',
         imagen: '/Images/shibumi19.jpg',
+        stock: 3,
         precio: 2300,
         descripcion: 'Increíble líquido de Cerezas combinadas y un toque de frescura. El Mixer internacional Nachef haciendo gala de su talento para combinar nuevos aromas europeos. Imperdible.'
     },
@@ -60,6 +67,7 @@ const liquidos = [
         marca: 'Shibumi',
         nombre: 'Arándanos Cheesecake',
         imagen: '/Images/shibumi21.jpg',
+        stock: 3,
         precio: 2300,
         descripcion: 'Receta mágica de Nachef.mixing. Arándanos seleccionados, con el balance justo de dulzor y acidez para lograr mantener el sabor silvestre de la fruta, y una masa digna de un maestro pastelero. Una vez más, aquí el Mixer desplego una cantidad de esencias exóticas, combinación muy compleja, pero con un resultado realmente formidable!'
     },
@@ -68,6 +76,7 @@ const liquidos = [
         marca: 'HSBG',
         nombre: 'Flow',
         imagen: '/Images/liquido25.jpg',
+        stock: 1,
         precio: 2100,
         descripcion: 'Mix tropical de mango, naranja y mandarina.'
     },
@@ -76,6 +85,7 @@ const liquidos = [
         marca: 'HSBG',
         nombre: 'Milf',
         imagen: '/Images/liquido23.jpg',
+        stock: 2,
         precio: 2100,
         descripcion: 'Milkshake de frutilla. Exquisito!'
     },
@@ -84,6 +94,7 @@ const liquidos = [
         marca: 'HSBG',
         nombre: 'Moritas',
         imagen: '/Images/liquido26.jpg',
+        stock: 2,
         precio: 2100,
         descripcion: 'Gomitas de mora, esa golosina ideal para vapear todo el día.'
     },
@@ -92,6 +103,7 @@ const liquidos = [
         marca: 'HSBG',
         nombre: 'Pink Lemonade',
         imagen: '/Images/liquido22.jpg',
+        stock: 0,
         precio: 2100,
         descripcion: 'Limonada de lima y limon con un suave toque jugo de frambuesa.'
     },
@@ -100,6 +112,7 @@ const liquidos = [
         marca: 'HSBG',
         nombre: 'White Coffee',
         imagen: '/Images/liquido24.jpg',
+        stock: 2,
         precio: 2100,
         descripcion: 'El mas rico café con la mejor crema y chocolate blanco'
     },

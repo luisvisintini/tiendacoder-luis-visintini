@@ -1,4 +1,3 @@
-import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Navigation = () => {
   const navigate = useNavigate()
   return (
+    <>
     <Navbar bg="dark" variant='dark' expand="lg">
       <Container>
         <Navbar.Brand href="/">
@@ -32,8 +32,10 @@ const Navigation = () => {
           </Nav>
           <CartWidget/>
         </Navbar.Collapse>
-      </Container>
+      </Container >
     </Navbar>
+    
+    </>
   )
 }
 

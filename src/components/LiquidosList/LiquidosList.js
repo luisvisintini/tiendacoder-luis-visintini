@@ -1,9 +1,9 @@
 import Liquido from "../Liquido/Liquido";
 
-function LiquidoCard( {liquidos} ) {
+const LiquidoCard = ( {liquidos} ) => {
   return (
-    <div className='container'>
-        <div className="row">
+    <div className='container text-center'>
+        <div className="row justify-content-center">
             {
                 liquidos.map(liquido => (
                     <Liquido key={liquido.id} liquido={liquido}/>

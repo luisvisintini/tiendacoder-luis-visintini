@@ -3,6 +3,8 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 
 
+
+
 const Liquido = ({liquido}) => {
 
   const navigate = useNavigate()
@@ -10,7 +12,7 @@ const Liquido = ({liquido}) => {
           <Card className='border-0' style={{ width: '18rem' }}>
             <Card.Img variant="top" src={liquido.imagen} />
             <Card.Body>
-              <Card.Title>{liquido.nombre}</Card.Title>
+              <Card.Title className='fw-bold'>{liquido.nombre}</Card.Title>
               <Card.Text>{liquido.marca}</Card.Text>
               <Card.Text>{liquido.descripcion.slice(0,40)}...</Card.Text>
               <Card.Text className='fw-bold fs-2'>${liquido.precio}</Card.Text>
