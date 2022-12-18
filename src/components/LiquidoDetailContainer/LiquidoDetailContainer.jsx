@@ -10,8 +10,6 @@ const LiquidoDetailContainer = () => {
     const [isLoading, setIsLoading] = useState(true)
     const params = useParams()
 
-    
-
     useEffect(() => {
         getLiquidosById(params.liquidoId)
         .then(response => {

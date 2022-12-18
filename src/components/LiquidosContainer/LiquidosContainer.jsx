@@ -4,7 +4,6 @@ import { getLiquidos, getLiquidosByMarca } from "../../data/ListDB"
 import { useParams } from "react-router-dom"
 import SpinnerKit from "../Spinner/SpinnerKit"
 
-
 const LiquidosContainer = ( {greeting} ) => {
 
   const [liquidos, setLiquidos] = useState([])

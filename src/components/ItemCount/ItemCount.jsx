@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { BsCart4 } from "react-icons/bs"
 
-
-
 const ItemCount = ({ stock, onAdd}) => {
 
     const [contador, setContador] = useState(0)
@@ -17,7 +15,6 @@ const ItemCount = ({ stock, onAdd}) => {
         if (contador > 0 ) {
             setContador(previo => previo -1)
         }
-        
     }
 
     return (
@@ -35,9 +32,7 @@ const ItemCount = ({ stock, onAdd}) => {
                         disabled={ !contador }
                         className="btn btn-success w-100 mt-3">Agregar al <BsCart4/></button>
                 </div>
-                
         </div>
-
     )
     }
 

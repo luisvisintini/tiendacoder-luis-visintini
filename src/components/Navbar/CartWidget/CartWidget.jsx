@@ -2,14 +2,11 @@ import { BsCart4 } from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import { CarritoContext } from '../../../context/CartContext';
-import { useContext } from 'react';
-
-
+import useCarrito from '../../../hooks/useCarrito';
 
 const CartWidget = () => {
 
-  const { obtenerCantidad } = useContext(CarritoContext)
+  const { obtenerCantidad } = useCarrito()
   const cantidadTotal = obtenerCantidad()
 
   const navigate = useNavigate()

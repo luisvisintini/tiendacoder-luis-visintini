@@ -2,9 +2,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 
-
-
-
 const Liquido = ({liquido}) => {
 
   const navigate = useNavigate()
