@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import LiquidosList from "../LiquidosList/LiquidosList"
-import { getLiquidos, getLiquidosByMarca } from "../../data/ListDB"
 import { useParams } from "react-router-dom"
 import SpinnerKit from "../Spinner/SpinnerKit"
+import { collection, getDocs, query, where } from "firebase/firestore"
+import { db } from "../../services/firebase/firebaseConfig"
 
 const LiquidosContainer = ( {greeting} ) => {
 
@@ -11,29 +12,31 @@ const LiquidosContainer = ( {greeting} ) => {
   const { marcaId } = useParams()
 
   useEffect(() => {
-    if(!marcaId) {
-      getLiquidos()
-        .then(response => {
-          setLiquidos(response)
-    })
-      .catch(error => {
-        console.log(error)
-    })
-    .finally(() => {
-      setIsLoading(false)
-    })
-    } else {
-      getLiquidosByMarca(marcaId)
-        .then(response => {
-          setLiquidos(response)
+    setIsLoading(true)
+
+    // referencia base de datos
+    const collectionRef = marcaId
+      ? query(collection(db, 'liquidos'), where('marca', '==', marcaId))
+      : collection(db, 'liquidos')
+
+
+    getDocs(collectionRef).then( response => {
+      console.log(response.docs) 
+      const liquidosConvert = response.docs.map(doc => {
+        const data = doc.data()
+
+        return { id: doc.id, ...data }
       })
-        .catch(error => {
-          console.log(error)
+
+        setLiquidos(liquidosConvert)
       })
-      .finally(()=> {
+      .catch( error => {
+        console.log(error);
+      })
+      .finally( () => {
         setIsLoading(false)
       })
-    }
+
     
   }, [marcaId])
 
