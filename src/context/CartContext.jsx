@@ -6,10 +6,13 @@ export const CarritoContext = createContext()
 export const CarritoProvider = ({ children }) => {
 
     const [carrito, setCarrito ] = useState([])
+    const [carritoVacio, setCarritoVacio] = useState(true)
 
     const agregarItem = (agregarProducto) => {
+
     if(!existeCarrito(agregarProducto.id)) {
         setCarrito([...carrito, agregarProducto])
+        setCarritoVacio(false)
     }
     }
 
@@ -37,11 +40,16 @@ export const CarritoProvider = ({ children }) => {
 
     const quitarProducto = (id) => {
         const nuevoCarrito = carrito.filter(producto => producto.id !== id)
-
         setCarrito(nuevoCarrito)
+        if(nuevoCarrito.length === 0) {
+            setCarritoVacio(true)
+        }
     }
 
-    console.log(carrito)
+    const borrarTodo = () => {
+        setCarrito([])
+        setCarritoVacio(true)
+    }
 
     return (
         
@@ -49,7 +57,9 @@ export const CarritoProvider = ({ children }) => {
             value={{ 
                     carrito, 
                     agregarItem, 
-                    existeCarrito, 
+                    existeCarrito,
+                    carritoVacio,
+                    borrarTodo,
                     obtenerCantidad,
                     obtenerTotal,
                     quitarProducto

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Cart from './components/Cart/Cart';
+import Checkout from './components/Checkout/Checkout';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import LiquidoDetailContainer from './components/LiquidoDetailContainer/LiquidoDetailContainer';
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/marca/:marcaId' element={<LiquidosContainer/>}/>
                 <Route path='/liquido/:liquidoId' element={<LiquidoDetailContainer/>}/>
                 <Route path='/carrito' element={<Cart/>}/>
+                <Route path='/checkout' element={<Checkout/>}/>
               </Routes>
           </BrowserRouter>
           <Footer/>
