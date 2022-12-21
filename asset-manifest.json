@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/tiendacoder-luis-visintini/static/css/main.9ef5b944.css",
+    "main.js": "/tiendacoder-luis-visintini/static/js/main.46bd9e5a.js",
+    "static/media/logoAdamssvg.svg": "/tiendacoder-luis-visintini/static/media/logoAdamssvg.8c0b2005efe2f5cf8b93fb80bdb1fbe5.svg",
+    "index.html": "/tiendacoder-luis-visintini/index.html",
+    "main.9ef5b944.css.map": "/tiendacoder-luis-visintini/static/css/main.9ef5b944.css.map",
+    "main.46bd9e5a.js.map": "/tiendacoder-luis-visintini/static/js/main.46bd9e5a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9ef5b944.css",
+    "static/js/main.46bd9e5a.js"
+  ]
+}
