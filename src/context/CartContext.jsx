@@ -5,6 +5,25 @@ export const CarritoContext = createContext()
 
 export const CarritoProvider = ({ children }) => {
 
+    const [datos, setDatos] = useState({
+        nombre: '',
+        apellido: '',
+        direccion: '',
+        email: '',
+        telefono: '',
+        ciudad: '',
+        cp: ''
+    })
+
+    const [alert, setAlert] = useState('')
+
+    const handleDatos = e => {
+        setDatos({
+            ...datos,
+            [e.target.name] : e.target.value
+        })
+    }
+
     const [carrito, setCarrito ] = useState([])
     const [carritoVacio, setCarritoVacio] = useState(true)
 
@@ -62,7 +81,11 @@ export const CarritoProvider = ({ children }) => {
                     borrarTodo,
                     obtenerCantidad,
                     obtenerTotal,
-                    quitarProducto
+                    quitarProducto,
+                    handleDatos,
+                    datos,
+                    alert,
+                    setAlert
                 }}>
                 {children}
         </CarritoContext.Provider>

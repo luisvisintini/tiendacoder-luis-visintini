@@ -23,7 +23,7 @@ const LiquidoDetail = ({id, marca, nombre, imagen, precio, descripcion, stock}) 
               <h4>${precio}</h4>
               <p>{descripcion}</p>
               <div className="action">
-               { existeCarrito(id) ? <Link to='/carrito' className="btn btn-primary">Finalizar Compra</Link> : stock > 0 
+               { existeCarrito(id) ? <Link to='/carrito' className="btn btn-primary">Ir al carrito</Link> : stock > 0 
                     ? <ItemCount stock={stock} onAdd={handleOnAdd}/> 
                     : <h2>No hay Stock</h2>
                }

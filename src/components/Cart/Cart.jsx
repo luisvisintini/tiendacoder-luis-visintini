@@ -56,7 +56,7 @@ const Cart = () => {
           to='/checkout' 
           className="btn btn-success w-25"
         >
-          Realizar Pago
+          Finalizar Compra
         </Link>
       </div>
 

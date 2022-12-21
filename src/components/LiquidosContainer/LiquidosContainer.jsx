@@ -21,7 +21,7 @@ const LiquidosContainer = ( {greeting} ) => {
 
 
     getDocs(collectionRef).then( response => {
-      console.log(response.docs) 
+      // console.log(response.docs) 
       const liquidosConvert = response.docs.map(doc => {
         const data = doc.data()
 
