@@ -7,8 +7,8 @@ import Footer from './components/Footer/Footer';
 import LiquidoDetailContainer from './components/LiquidoDetailContainer/LiquidoDetailContainer';
 import LiquidosContainer from './components/LiquidosContainer/LiquidosContainer';
 import Navigation from './components/Navbar/Navigation';
+import OrderStatus from './components/OrderStatus/OrderStatus';
 import { CarritoProvider } from './context/CartContext';
-
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
                 <Route path='/liquido/:liquidoId' element={<LiquidoDetailContainer/>}/>
                 <Route path='/carrito' element={<Cart/>}/>
                 <Route path='/checkout' element={<Checkout/>}/>
+                <Route path="/order/:orderId" element={<OrderStatus />} />
               </Routes>
           </BrowserRouter>
           <Footer/>

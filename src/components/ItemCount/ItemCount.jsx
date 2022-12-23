@@ -29,7 +29,7 @@ const ItemCount = ({ stock, onAdd}) => {
                 <div>
                     <button 
                         onClick={()=> onAdd(contador)}
-                        disabled={ !contador }
+                        disabled={ !contador } 
                         className="btn btn-success w-100 mt-3">Agregar al <BsCart4/></button>
                 </div>
         </div>

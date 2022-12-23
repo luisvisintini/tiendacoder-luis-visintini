@@ -1,10 +1,25 @@
+import { useEffect } from "react"
+import { useState } from "react"
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import useCarrito from "../../hooks/useCarrito"
+import SpinnerKit from "../Spinner/SpinnerKit"
 
 const Cart = () => {
 
   const { carrito, quitarProducto, obtenerTotal, borrarTodo, carritoVacio } = useCarrito()
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, []);
+
+  if(isLoading) {
+    return <SpinnerKit />
+  }
 
   const total = obtenerTotal()
 

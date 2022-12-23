@@ -10,32 +10,31 @@ import { getDocs } from 'firebase/firestore';
 import { useState } from 'react';
 import SpinnerKit from '../Spinner/SpinnerKit';
 import { useNavigate } from 'react-router-dom';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 
 
 const Checkout = () => {
 
-  const { carrito, obtenerTotal, datos, handleDatos, alert, setAlert, borrarTodo } = useCarrito()
-
   const [loading, setLoading] = useState(false)
+
+  const { carrito, obtenerTotal, datos, handleDatos, alert, setAlert, borrarTodo } = useCarrito()
 
   const navigate = useNavigate()
 
+  const MySwal = withReactContent(Swal)
+
   const handleSubmit = async e => {
-    setLoading(true)
     e.preventDefault()
-    
     if(Object.values(datos).includes('')) {
       setAlert('Todos los campos son obligatorios')
       return
     } 
-
     setAlert('')
 
     try {
       const objOrder = {
-        datos: {
-          datos,
-        }, 
+        datos: datos, 
         items: carrito,
         total: obtenerTotal()
       }
@@ -61,37 +60,49 @@ const Checkout = () => {
           sinStock.push({ id: doc.id, ...dataDoc })
         }
       })
+
+      setLoading(true)
   
       if(sinStock.length === 0 ) {
         await batch.commit()
-  
         const orderRef = collection(db, 'orders')
-  
         const orderAgregada = await addDoc( orderRef, objOrder)
-  
-        borrarTodo()
-
-        setTimeout(() => {
-          navigate('/')
-        }, 2000);
         
-        // TODO: agregar notificacion
-        console.log(orderAgregada.id)
+        MySwal.fire({
+          title: "¡Compra Realizada!",
+          text: `Número de orden: ${orderAgregada.id}`,
+          icon: "success",
+          footer:"Generando el detalle de la orden...",
+          showConfirmButton: false,
+        })
+
+        borrarTodo()
+      setTimeout(() => {
+      Swal.close()
+      navigate(`/order/${orderAgregada.id}`)
+    }, 5000);
+
       } else {
-        setAlert('No hay stock')
+        MySwal.fire({
+          title: "¡Ups!",
+          text: `No quedó stock de ese producto!`,
+          icon: "error",
+          footer: "Por favor, actualizá la página para ver el stock actual.",
+          showConfirmButton: false,
+        });
       }
     } catch (error) {
       console.log(error)
     } finally {
       setLoading(false)
     }
+
+    
   }
 
   if(loading) {
     return <SpinnerKit />
   }
-
-  
 
   return (
     <>
@@ -100,9 +111,7 @@ const Checkout = () => {
     </div>
     <div className='container'>
       { alert && <Alert/>}
-        <Form 
-          onSubmit={handleSubmit}
-        >
+        <Form>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="nombre" onChange={e => handleDatos(e)}>
               <Form.Label>Nombre</Form.Label>
