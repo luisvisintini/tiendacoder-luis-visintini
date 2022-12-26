@@ -8,7 +8,7 @@ const OrderStatus = () => {
   const { orderId } = useParams();
 
   const [orderData, setOrderData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const order = doc(db, "orders", orderId);
@@ -19,13 +19,13 @@ const OrderStatus = () => {
         setOrderData(data);
       })
       .finally(() => {
-        setIsLoading(false);
+        setLoading(false);
       });
   }, [orderId]);
 
   const { datos, items, total } = orderData;
 
-  if (isLoading) {
+  if (loading) {
     return <SpinnerKit />;
   }
 
@@ -33,6 +33,10 @@ const OrderStatus = () => {
     <>
       <div className="container mt-5">
         <h1 className="text-center mb-5">Resumen de tu Pedido</h1>
+        <p className="text-center mb-5">
+          Puedes copiar el numero de orden y hacer tu consulta para ver el
+          estado
+        </p>
         <h3>Numero de Orden: {orderId}</h3>
         <h3>
           Cliente: {datos.nombre} {datos.apellido}
@@ -59,12 +63,10 @@ const OrderStatus = () => {
               width={200}
               className="rounded-xl max-h-20 w-20 lg:max-h-28 lg:w-28 shadow-lg ml-8 lg:ml-0 shadow-slate-100/80 ring-2 ring-slate-700/50"
             />
-            <p className="fw-bold mt-2">
-              {item.nombre}
-            </p>
+            <p className="fw-bold mt-2">{item.nombre}</p>
             <div className="flex flex-col items-center sm:flex-row">
               <p className="sm:text-base md:text-lg lg:text-xl w-max-content text-slate-500 font-medium tracking-wide h-12 w-40 flex justify-center items-center">
-              Cantidad: {item.cantidad} x ${item.precio} 
+                Cantidad: {item.cantidad} x ${item.precio}
               </p>
               <p className="fw-bold">
                 SubTotal: ${item.precio * item.cantidad}
@@ -73,16 +75,11 @@ const OrderStatus = () => {
           </div>
         ))}
         <div className="flex justify-center p-6">
-          <h4 className="text-center">
-            Total de la compra: $ {total}
-          </h4>
+          <h4 className="text-center">Total de la compra: $ {total}</h4>
         </div>
       </div>
       <div className="container text-center mt-5">
-        <Link 
-          className="btn btn-primary w-50"
-          to='/'
-        >
+        <Link className="btn btn-primary w-50" to="/">
           Ir a inicio
         </Link>
       </div>

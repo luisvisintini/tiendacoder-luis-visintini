@@ -1,13 +1,13 @@
-import { useEffect } from "react"
-import { useState } from "react"
-import { Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import useCarrito from "../../hooks/useCarrito"
-import SpinnerKit from "../Spinner/SpinnerKit"
+import { useEffect } from "react";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import useCarrito from "../../hooks/useCarrito";
+import SpinnerKit from "../Spinner/SpinnerKit";
 
 const Cart = () => {
-
-  const { carrito, quitarProducto, obtenerTotal, borrarTodo, carritoVacio } = useCarrito()
+  const { carrito, quitarProducto, obtenerTotal, borrarTodo, carritoVacio } =
+    useCarrito();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,13 +17,13 @@ const Cart = () => {
     }, 500);
   }, []);
 
-  if(isLoading) {
-    return <SpinnerKit />
+  if (isLoading) {
+    return <SpinnerKit />;
   }
 
-  const total = obtenerTotal()
+  const total = obtenerTotal();
 
-  if(carritoVacio) {
+  if (carritoVacio) {
     return (
       <div>
         <h2 className="text-center mt-5 mb-5">No hay nada por aqui...</h2>
@@ -33,51 +33,56 @@ const Cart = () => {
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <>
       <h1 className="text-center mt-4 fw-bold mb-5">Carrito</h1>
-      { carrito.map(producto => {
-          return (
-            // TODO: CORREGIR CARDS 
-            <div key={producto.id} className="container">
-              <div className="d-flex">
-                  <div className="col-4">
-                    <div className="card">
-                      <div className="card-body">
-                        <img src={producto.imagen} alt={producto.nombre} width={100}/>
-                        <h5>{producto.nombre}</h5>
-                        <p>${producto.precio}</p>
-                        <p>Cantidad: {producto.cantidad}</p>
-                        <p>SubTotal: ${producto.precio * producto.cantidad}</p>
-                        <Button className="btn btn-danger" onClick={() => quitarProducto(producto.id)}>Eliminar</Button>
-                      </div>
-                    </div>
+      {carrito.map((producto) => {
+        return (
+          // TODO: CORREGIR CARDS
+          <div key={producto.id} className="container">
+            <div className="d-flex">
+              <div className="col-4">
+                <div className="card">
+                  <div className="card-body">
+                    <img
+                      src={producto.imagen}
+                      alt={producto.nombre}
+                      width={100}
+                    />
+                    <h5>{producto.nombre}</h5>
+                    <p>${producto.precio}</p>
+                    <p>Cantidad: {producto.cantidad}</p>
+                    <p>SubTotal: ${producto.precio * producto.cantidad}</p>
+                    <Button
+                      className="btn btn-danger"
+                      onClick={() => quitarProducto(producto.id)}
+                    >
+                      Eliminar
+                    </Button>
                   </div>
+                </div>
               </div>
             </div>
-          )
-        })
-      }
+          </div>
+        );
+      })}
       <div className="mt-5 text-center mb-5">
-        <Button className="btn btn-danger" onClick={borrarTodo}>Eliminar Todo</Button>
+        <Button className="btn btn-danger" onClick={borrarTodo}>
+          Eliminar Todo
+        </Button>
       </div>
       <h1 className="text-center">Total: ${total}</h1>
 
       <div className="text-center mt-5 mb-5">
-        <Link 
-          to='/checkout' 
-          className="btn btn-success w-25"
-        >
+        <Link to="/checkout" className="btn btn-success w-25">
           Finalizar Compra
         </Link>
       </div>
-
-      
     </>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
