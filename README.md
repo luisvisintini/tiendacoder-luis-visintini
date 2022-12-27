@@ -4,6 +4,10 @@
 
 Un proyecto creado con [Create React App](https://github.com/facebook/create-react-app) a modo de aprendizaje en Coderhouse.
 
+## Proyecto web hosteado:
+[Adams Vape](https://tiendacoder-luis-visintini.vercel.app/)
+
+
 ## Tecnologías y herramientas utilizadas
 
 | Front-End         |
@@ -22,7 +26,7 @@ Un proyecto creado con [Create React App](https://github.com/facebook/create-rea
 --- 
 
 
-Para iniciar el proyecto:
+Para iniciar el proyecto de forma local:
 
 Instalar las dependencias necesarias mediante el comando:
 ### `npm install`
