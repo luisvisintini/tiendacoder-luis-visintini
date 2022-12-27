@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebase/firebaseConfig";
 import { BsCheckLg } from "react-icons/bs";
+import { BiLogIn } from "react-icons/bi"
+import { BsFillPersonPlusFill } from "react-icons/bs"
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -27,6 +29,10 @@ const Navigation = () => {
       setOrdersId(ordersId);
     });
   }, []);
+
+  const handleSubmit = e => {
+    e.preventDefault()
+  }
 
   return (
     <>
@@ -54,7 +60,10 @@ const Navigation = () => {
               </Nav.Link>
               <Nav.Link onClick={() => navigate("/marca/HSBG")}>HSBG</Nav.Link>
             </Nav>
-            <Form className="d-flex">
+            <Form 
+              className="d-flex"
+              onSubmit={handleSubmit}
+              >
               <Form.Control
                 type="search"
                 placeholder="Buscar orden"
@@ -74,6 +83,16 @@ const Navigation = () => {
                 </button>
               )}
             </Form>
+            <Nav.Link onClick={() => navigate("/login")}>
+              <button className="btn btn-light bg-transparent text-white border-0">
+                <BiLogIn />
+              </button>
+            </Nav.Link>
+            <Nav.Link onClick={() => navigate("/signup")}>
+              <button className="btn btn-light bg-transparent text-white border-0">
+                <BsFillPersonPlusFill />
+              </button>
+            </Nav.Link>
             <CartWidget />
           </Navbar.Collapse>
         </Container>

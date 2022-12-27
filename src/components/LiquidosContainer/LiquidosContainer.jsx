@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import LiquidosList from "../LiquidosList/LiquidosList";
 import { useParams } from "react-router-dom";
 import SpinnerKit from "../Spinner/SpinnerKit";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../services/firebase/firebaseConfig";
+import { collectionRef } from "../../services/firestore/liquidos";
 
 const LiquidosContainer = ({ greeting }) => {
   const [liquidos, setLiquidos] = useState([]);
@@ -13,21 +12,9 @@ const LiquidosContainer = ({ greeting }) => {
   useEffect(() => {
     setIsLoading(true);
 
-    // referencia base de datos
-    const collectionRef = marcaId
-      ? query(collection(db, "liquidos"), where("marca", "==", marcaId))
-      : collection(db, "liquidos");
-
-    getDocs(collectionRef)
-      .then((response) => {
-        // console.log(response.docs)
-        const liquidosConvert = response.docs.map((doc) => {
-          const data = doc.data();
-
-          return { id: doc.id, ...data };
-        });
-
-        setLiquidos(liquidosConvert);
+    collectionRef(marcaId)
+      .then((liquidos) => {
+        setLiquidos(liquidos);
       })
       .catch((error) => {
         console.log(error);
