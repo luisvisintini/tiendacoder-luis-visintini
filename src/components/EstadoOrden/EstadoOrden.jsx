@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { db } from "../../services/firebase/firebaseConfig";
 import SpinnerKit from "../Spinner/SpinnerKit";
 
-const OrderStatus = () => {
+const EstadoOrden = () => {
   const { orderId } = useParams();
 
   const [orderData, setOrderData] = useState([]);
@@ -88,4 +88,4 @@ const OrderStatus = () => {
   );
 };
 
-export default OrderStatus;
+export default EstadoOrden;

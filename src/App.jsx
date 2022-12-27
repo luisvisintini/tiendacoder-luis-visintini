@@ -3,12 +3,12 @@ import './App.css';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
 import Contact from './components/Contact/Contact';
+import EstadoOrden from './components/EstadoOrden/EstadoOrden';
 import Footer from './components/Footer/Footer';
 import LiquidoDetailContainer from './components/LiquidoDetailContainer/LiquidoDetailContainer';
 import LiquidosContainer from './components/LiquidosContainer/LiquidosContainer';
 import Login from './components/Login/Login';
 import Navigation from './components/Navbar/Navigation';
-import OrderStatus from './components/OrderStatus/OrderStatus';
 import SignUp from './components/SignUp/SignUp';
 import { CarritoProvider } from './context/CartContext';
 
@@ -28,7 +28,7 @@ function App() {
                 <Route path='/liquido/:liquidoId' element={<LiquidoDetailContainer/>}/>
                 <Route path='/carrito' element={<Cart/>}/>
                 <Route path='/checkout' element={<Checkout/>}/>
-                <Route path="/order/:orderId" element={<OrderStatus />} />
+                <Route path="/order/:orderId" element={<EstadoOrden />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
               </Routes>
