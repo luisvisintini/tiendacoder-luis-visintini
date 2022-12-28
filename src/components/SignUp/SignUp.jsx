@@ -42,8 +42,6 @@ const SignUp = () => {
     setAlert('')
   }
 
-  
-
   return (
     <>
     <div>
