@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 import SpinnerKit from "../Spinner/SpinnerKit";
 import { collectionRef } from "../../services/firestore/liquidos";
 
+
 const LiquidosContainer = ({ greeting }) => {
+
   const [liquidos, setLiquidos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { marcaId } = useParams();

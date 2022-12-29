@@ -1,15 +1,69 @@
+import { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { loginWithGoogle } from "../../services/firebase/providers";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import SpinnerKit from "../Spinner/SpinnerKit";
 
 const Login = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    photoURL: '',
+    fullName: ''
+  })
 
-  const startGoogleSignIn = async () => {
-    const result = await loginWithGoogle();
-    return result;
-  };
+  const { login, loginGoogle } = useAuth()
+  const navigate = useNavigate()
+  const [alert, setAlert] = useState()
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
+  if (loading) {
+    return <SpinnerKit />;
+  }
+
+  const handleChange = ({target: {name, value}}) => {
+    setUser({...user, [name]: value})
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    setAlert()
+    try {
+      
+      await login(user.email, user.password)
+      // TODO: spinner
+      navigate('/')
+    } catch (error) {
+      // TODO: alerta error y validaciones de usuario ya registrado, password corto, poner en useState un alert arriba del form (msg && <Alert/> alert={alert})
+      setAlert(alert)
+    }
+  }
+
+
+  // todo: revisar el error con console.log(error.code)
+  /* todo: if(error.code = "auth/internal=error") {
+    setAlert('Correo inválido)
+  }
+  */
+
+  // todo: traer borrarTodo de useCarrito para limpiar estados
+
+    const handleGoogleSignIn = async () => {
+      try {
+        await loginGoogle()
+        
+        navigate('/')
+      } catch (error) {
+        setAlert(alert)
+      }
+    }
+
 
   return (
     <>
@@ -26,28 +80,37 @@ const Login = () => {
             </div>
             <div className="col-lg-8">
               <div className="card-body py-5 px-md-5">
-                <form>
+                <form 
+                  onSubmit={handleSubmit}
+                >
                   <div className="form-outline mb-4">
-                    <input type="email" id="email" className="form-control" />
-                    <label className="form-label" htmlFor="email">
+                  <label className="form-label" htmlFor="email">
                       Email
                     </label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      className="form-control" 
+                      placeholder="Ej: tunombre@correo.com"
+                      onChange={handleChange}
+                    />
                   </div>
 
                   <div className="form-outline mb-4">
-                    <input
-                      type="password"
-                      id="password"
-                      className="form-control"
-                    />
-                    <label className="form-label" htmlFor="password">
+                  <label className="form-label" htmlFor="password">
                       Password
                     </label>
+                    <input
+                      type="password"
+                      name="password"
+                      className="form-control"
+                      placeholder="Minimo 6 caracteres"
+                      onChange={handleChange}
+                    />
                   </div>
 
                   <button
-                    onClick={handleSubmit}
-                    type="button"
+                    type="submit"
                     className="btn btn-dark btn-block mb-4"
                   >
                     Ingresar
@@ -56,8 +119,8 @@ const Login = () => {
 
                   <button
                     className="btn btn-dark btn-block"
-                    type="button"
-                    onClick={startGoogleSignIn}
+                    type="submit"
+                    onClick={handleGoogleSignIn}
                   >
                     <FcGoogle size={30} /> Ingresar con Google
                   </button>
