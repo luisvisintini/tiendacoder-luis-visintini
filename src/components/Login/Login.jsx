@@ -7,15 +7,15 @@ import SpinnerKit from "../Spinner/SpinnerKit";
 const Login = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({
-    email: '',
-    password: '',
-    photoURL: '',
-    fullName: ''
-  })
+    email: "",
+    password: "",
+    photoURL: "",
+    fullName: "",
+  });
 
-  const { login, loginGoogle } = useAuth()
-  const navigate = useNavigate()
-  const [alert, setAlert] = useState()
+  const { login, loginGoogle } = useAuth();
+  const navigate = useNavigate();
+  const [alert, setAlert] = useState();
 
   useEffect(() => {
     setTimeout(() => {
@@ -27,43 +27,30 @@ const Login = () => {
     return <SpinnerKit />;
   }
 
-  const handleChange = ({target: {name, value}}) => {
-    setUser({...user, [name]: value})
-  }
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({ ...user, [name]: value });
+  };
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    setAlert()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setAlert();
     try {
-      
-      await login(user.email, user.password)
-      // TODO: spinner
-      navigate('/')
+      await login(user.email, user.password);
+      navigate("/");
     } catch (error) {
-      // TODO: alerta error y validaciones de usuario ya registrado, password corto, poner en useState un alert arriba del form (msg && <Alert/> alert={alert})
-      setAlert(alert)
+      setAlert(alert);
     }
-  }
+  };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await loginGoogle();
 
-  // todo: revisar el error con console.log(error.code)
-  /* todo: if(error.code = "auth/internal=error") {
-    setAlert('Correo inválido)
-  }
-  */
-
-  // todo: traer borrarTodo de useCarrito para limpiar estados
-
-    const handleGoogleSignIn = async () => {
-      try {
-        await loginGoogle()
-        
-        navigate('/')
-      } catch (error) {
-        setAlert(alert)
-      }
+      navigate("/");
+    } catch (error) {
+      setAlert(alert);
     }
-
+  };
 
   return (
     <>
@@ -80,24 +67,22 @@ const Login = () => {
             </div>
             <div className="col-lg-8">
               <div className="card-body py-5 px-md-5">
-                <form 
-                  onSubmit={handleSubmit}
-                >
+                <form onSubmit={handleSubmit}>
                   <div className="form-outline mb-4">
-                  <label className="form-label" htmlFor="email">
+                    <label className="form-label" htmlFor="email">
                       Email
                     </label>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      className="form-control" 
+                    <input
+                      type="email"
+                      name="email"
+                      className="form-control"
                       placeholder="Ej: tunombre@correo.com"
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="form-outline mb-4">
-                  <label className="form-label" htmlFor="password">
+                    <label className="form-label" htmlFor="password">
                       Password
                     </label>
                     <input
@@ -109,10 +94,7 @@ const Login = () => {
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="btn btn-dark btn-block mb-4"
-                  >
+                  <button type="submit" className="btn btn-dark btn-block mb-4">
                     Ingresar
                   </button>
                   <div className="divider d-flex align-items-center my-1"></div>

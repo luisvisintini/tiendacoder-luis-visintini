@@ -1,23 +1,20 @@
 import { useState, useEffect } from "react";
-// import { BsFillPersonFill } from "react-icons/bs"
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import SpinnerKit from "../Spinner/SpinnerKit";
-// import { RiLockPasswordFill } from "react-icons/ri"
-// import useCarrito from "../../hooks/useCarrito"
 
 const SignUp = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
 
-  const { signup } = useAuth()
-  const navigate = useNavigate()
-  const [alert, setAlert] = useState()
+  const { signup } = useAuth();
+  const navigate = useNavigate();
+  const [alert, setAlert] = useState();
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,30 +26,21 @@ const SignUp = () => {
     return <SpinnerKit />;
   }
 
-  const handleChange = ({target: {name, value}}) => {
-    setUser({...user, [name]: value})
-  }
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({ ...user, [name]: value });
+  };
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    setAlert()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setAlert();
     try {
-      
-      await signup(user.email, user.password)
-      // TODO: spinner loading
-      navigate('/')
+      await signup(user.email, user.password);
+      navigate("/");
     } catch (error) {
-      // TODO: alerta error y validaciones de usuario ya registrado, password corto, poner en useState un alert arriba del form (msg && <Alert/> alert={alert})
-      setAlert(alert.message)
+      setAlert(alert.message);
     }
-  }
+  };
 
-
-  // todo: revisar el error con console.log(error.code)
-  /* todo: if(error.code = "auth/internal=error") {
-    setAlert('Correo inválido)
-  }
-  */
   return (
     <>
       <div>
@@ -67,8 +55,8 @@ const SignUp = () => {
                         <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                           Registro
                         </p>
-                        <form className="mx-1 mx-md-4"
-                        onSubmit={handleSubmit}>
+                        <form className="mx-1 mx-md-4" onSubmit={handleSubmit}>
+                          // TODO: SE DEJAN DIVS PARA SEGUIR EN CONSTRUCCION
                           {/* <div className="d-flex flex-row align-items-center mb-4">
                           <BsFillPersonFill className="me-1 mb-4"/>
                           <div className="form-outline flex-fill mb-0">
@@ -82,7 +70,6 @@ const SignUp = () => {
                             <label className="form-label" htmlFor="nombre">Tu Nombre</label>
                           </div>
                         </div> */}
-
                           <div className="d-flex flex-row align-items-center mb-4">
                             <MdEmail className="me-1 mb-4" />
                             <div className="form-outline flex-fill mb-0">
@@ -98,7 +85,6 @@ const SignUp = () => {
                               />
                             </div>
                           </div>
-
                           <div className="d-flex flex-row align-items-center mb-4">
                             <RiLockPasswordLine className="me-1 mb-4" />
                             <div className="form-outline flex-fill mb-0">
@@ -114,7 +100,6 @@ const SignUp = () => {
                               />
                             </div>
                           </div>
-
                           {/* <div className="d-flex flex-row align-items-center mb-4">
                           <RiLockPasswordFill className="me-1 mb-4"/>
                           <div className="form-outline flex-fill mb-0">
@@ -128,7 +113,6 @@ const SignUp = () => {
                             <label className="form-label" htmlFor="passwordrepeat">Repetir password</label>
                           </div>
                         </div> */}
-
                           <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                             <button
                               type="submit"

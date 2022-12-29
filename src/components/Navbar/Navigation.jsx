@@ -10,10 +10,10 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebase/firebaseConfig";
 import { BsCheckLg } from "react-icons/bs";
-import { BiLogIn } from "react-icons/bi"
-import { BsFillPersonPlusFill } from "react-icons/bs"
+import { BiLogIn } from "react-icons/bi";
+import { BsFillPersonPlusFill } from "react-icons/bs";
 import { useAuth } from "../../context/AuthContext";
-import { BiLogOut } from "react-icons/bi"
+import { BiLogOut } from "react-icons/bi";
 import UserImage from "../User/UserImage";
 
 const Navigation = () => {
@@ -22,12 +22,12 @@ const Navigation = () => {
   const [orderId, setOrderId] = useState([]);
   const [ordersId, setOrdersId] = useState([]);
 
-  const {user, logout } = useAuth()
-  console.log(user)
+  const { user, logout } = useAuth();
+  console.log(user);
 
   useEffect(() => {
     const collectionOrders = collection(db, "orders");
-    
+
     getDocs(collectionOrders).then((response) => {
       const ordersId = response.docs.map((doc) => {
         return { id: doc.id };
@@ -36,21 +36,18 @@ const Navigation = () => {
     });
   }, []);
 
-
-  const handleSubmit = e => {
-    e.preventDefault()
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   const handleLogout = async () => {
-
     try {
-      await logout()
-      navigate('/login')
-      
+      await logout();
+      navigate("/login");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -78,10 +75,7 @@ const Navigation = () => {
               </Nav.Link>
               <Nav.Link onClick={() => navigate("/marca/HSBG")}>HSBG</Nav.Link>
             </Nav>
-            <Form 
-              className="d-flex"
-              onSubmit={handleSubmit}
-              >
+            <Form className="d-flex" onSubmit={handleSubmit}>
               <Form.Control
                 type="search"
                 placeholder="Buscar orden"
@@ -101,20 +95,33 @@ const Navigation = () => {
                 </button>
               )}
             </Form>
-            <Nav.Link >
-               <button onClick={() => navigate("/signup")} className="btn btn-light bg-transparent text-white border-0">
-               <BsFillPersonPlusFill />
+            <Nav.Link>
+              <button
+                onClick={() => navigate("/signup")}
+                className="btn btn-light bg-transparent text-white border-0"
+              >
+                <BsFillPersonPlusFill />
               </button>
             </Nav.Link>
-            {user ? <Nav.Link onClick={handleLogout}>
+            {user ? (
+              <Nav.Link onClick={handleLogout}>
                 <button className="btn btn-light bg-transparent text-white border-0">
-                {user.photoURL ? <UserImage src={user.photoURL} /> : <BiLogOut/> }
+                  {user.photoURL ? (
+                    <UserImage src={user.photoURL} />
+                  ) : (
+                    <BiLogOut />
+                  )}
                 </button>
-              </Nav.Link> : 
-              <button onClick={() => navigate("/login")} className="btn btn-light bg-transparent text-white border-0"><BiLogIn /></button>
-              }
-            
-           
+              </Nav.Link>
+            ) : (
+              <button
+                onClick={() => navigate("/login")}
+                className="btn btn-light bg-transparent text-white border-0"
+              >
+                <BiLogIn />
+              </button>
+            )}
+
             <CartWidget />
           </Navbar.Collapse>
         </Container>
@@ -124,7 +131,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
-// todo: una vez realizada la validacion con google traemos aca todas las props del usuario que queremos mostrar
-// todo: traemos el logout y cambiamos el botton para cerrar la sesion
-// todo: button onClick={handleLogout}
