@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useCarrito from "../../hooks/useCarrito";
 import SpinnerKit from "../Spinner/SpinnerKit";
 import { FaTrashAlt } from "react-icons/fa";
+
 const Cart = () => {
   const { carrito, quitarProducto, obtenerTotal, borrarTodo, carritoVacio } =
     useCarrito();

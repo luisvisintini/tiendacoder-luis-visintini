@@ -56,7 +56,7 @@ const SignUp = () => {
                           Registro
                         </p>
                         <form className="mx-1 mx-md-4" onSubmit={handleSubmit}>
-                          // TODO: SE DEJAN DIVS PARA SEGUIR EN CONSTRUCCION
+                          {/* SE DEJAN DIVS PARA CONSTRUCCION */}
                           {/* <div className="d-flex flex-row align-items-center mb-4">
                           <BsFillPersonFill className="me-1 mb-4"/>
                           <div className="form-outline flex-fill mb-0">
