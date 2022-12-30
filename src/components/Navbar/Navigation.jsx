@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import CartWidget from "./CartWidget/CartWidget";
 import logo from "../../logoAdamssvg.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { FaSearchPlus } from "react-icons/fa";
 import { useEffect, useState } from "react";
@@ -23,7 +23,6 @@ const Navigation = () => {
   const [ordersId, setOrdersId] = useState([]);
 
   const { user, logout } = useAuth();
-  console.log(user);
 
   useEffect(() => {
     const collectionOrders = collection(db, "orders");
@@ -53,14 +52,16 @@ const Navigation = () => {
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="/">
-            <img
-              src={logo}
-              width="100"
-              height="100"
-              className="d-inline-block align-top"
-              alt="Adams Vape logo"
-            />
+          <Navbar.Brand >
+            <Link to='/'>
+              <img
+                src={logo}
+                width="100"
+                height="100"
+                className="d-inline-block align-top"
+                alt="Adams Vape logo"
+              />
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

@@ -9,8 +9,7 @@ const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    photoURL: "",
-    fullName: "",
+    
   });
 
   const { login, loginGoogle } = useAuth();
@@ -45,7 +44,7 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       await loginGoogle();
-
+      
       navigate("/");
     } catch (error) {
       setAlert(alert);
