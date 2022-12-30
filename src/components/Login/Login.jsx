@@ -1,55 +1,29 @@
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import SpinnerKit from "../Spinner/SpinnerKit";
 
 const Login = () => {
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-    
-  });
 
-  const { login, loginGoogle } = useAuth();
-  const navigate = useNavigate();
-  const [alert, setAlert] = useState();
+  const { login, loginGoogle } = useAuth()
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
+    const [user, setUser] = useState({
+        email: "",
+        password: "",
+        fullName: "",
+        photoURL: ""
+      });
+    const dataUser = e => {
+        setUser({
+          ...user,
+          [e.target.name]: e.target.value
+        })
+      }
 
-  if (loading) {
-    return <SpinnerKit />;
-  }
-
-  const handleChange = ({ target: { name, value } }) => {
-    setUser({ ...user, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setAlert();
-    try {
-      await login(user.email, user.password);
-      navigate("/");
-    } catch (error) {
-      setAlert(alert);
+    const handleSubmit = e => {
+        e.preventDefault()
+        login(user.email, user.password, user.fullName, user.photoURL)
     }
-  };
-
-  const handleGoogleSignIn = async () => {
-    try {
-      await loginGoogle();
-      
-      navigate("/");
-    } catch (error) {
-      setAlert(alert);
-    }
-  };
 
   return (
     <>
@@ -66,7 +40,22 @@ const Login = () => {
             </div>
             <div className="col-lg-8">
               <div className="card-body py-5 px-md-5">
-                <form onSubmit={handleSubmit}>
+                <form 
+                  onSubmit={handleSubmit}
+                >
+                  <div className="form-outline mb-4">
+                    <label className="form-label" htmlFor="fullName">
+                      Nombre
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      className="form-control"
+                      placeholder="Tu nombre"
+                      onChange={dataUser}
+                    />
+                  </div>
+
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="email">
                       Email
@@ -76,7 +65,7 @@ const Login = () => {
                       name="email"
                       className="form-control"
                       placeholder="Ej: tunombre@correo.com"
-                      onChange={handleChange}
+                      onChange={dataUser}
                     />
                   </div>
 
@@ -89,11 +78,15 @@ const Login = () => {
                       name="password"
                       className="form-control"
                       placeholder="Minimo 6 caracteres"
-                      onChange={handleChange}
+                      onChange={dataUser}
                     />
                   </div>
 
-                  <button type="submit" className="btn btn-dark btn-block mb-4">
+                  <button 
+                    type="submit" 
+                    className="btn btn-dark btn-block mb-4"
+                    onChange={dataUser}
+                  >
                     Ingresar
                   </button>
                   <div className="divider d-flex align-items-center my-1"></div>
@@ -101,7 +94,7 @@ const Login = () => {
                   <button
                     className="btn btn-dark btn-block"
                     type="submit"
-                    onClick={handleGoogleSignIn}
+                    onClick={loginGoogle}
                   >
                     <FcGoogle size={30} /> Ingresar con Google
                   </button>

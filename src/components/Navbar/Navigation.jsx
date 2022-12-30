@@ -10,10 +10,8 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebase/firebaseConfig";
 import { BsCheckLg } from "react-icons/bs";
-import { BiLogIn } from "react-icons/bi";
-import { BsFillPersonPlusFill } from "react-icons/bs";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { useAuth } from "../../context/AuthContext";
-import { BiLogOut } from "react-icons/bi";
 import UserImage from "../User/UserImage";
 
 const Navigation = () => {
@@ -23,7 +21,6 @@ const Navigation = () => {
   const [ordersId, setOrdersId] = useState([]);
 
   const { user, logout } = useAuth();
-
   useEffect(() => {
     const collectionOrders = collection(db, "orders");
 
@@ -96,20 +93,12 @@ const Navigation = () => {
                 </button>
               )}
             </Form>
-            <Nav.Link>
-              <button
-                onClick={() => navigate("/signup")}
-                className="btn btn-light bg-transparent text-white border-0"
-              >
-                <BsFillPersonPlusFill />
-              </button>
-            </Nav.Link>
             {user ? (
               <Nav.Link onClick={handleLogout}>
                 <button className="btn btn-light bg-transparent text-white border-0">
-                  {user.photoURL ? (
+                  {user.photoURL ?
                     <UserImage src={user.photoURL} />
-                  ) : (
+                   : (
                     <BiLogOut />
                   )}
                 </button>
@@ -118,9 +107,7 @@ const Navigation = () => {
               <button
                 onClick={() => navigate("/login")}
                 className="btn btn-light bg-transparent text-white border-0"
-              >
-                <BiLogIn />
-              </button>
+              ><BiLogIn className="me-1"/>Login</button>
             )}
 
             <CartWidget />

@@ -1,45 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import Alert from "../Alert/Alert";
 import SpinnerKit from "../Spinner/SpinnerKit";
+import { BsFillPersonFill } from 'react-icons/bs'
+const Register = () => {
+    const { signup } = useAuth()
 
-const SignUp = () => {
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+    const [user, setUser] = useState({
+        email: "",
+        password: "",
+        fullName: "",
+        photoURL: ""
+      });
+    
+    const dataUser = e => {
+        setUser({
+          ...user,
+          [e.target.name]: e.target.value
+        })
+      }
 
-  const { signup } = useAuth();
-  const navigate = useNavigate();
-  const [alert, setAlert] = useState();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
-
-  if (loading) {
-    return <SpinnerKit />;
-  }
-
-  const handleChange = ({ target: { name, value } }) => {
-    setUser({ ...user, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setAlert();
-    try {
-      await signup(user.email, user.password);
-      navigate("/");
-    } catch (error) {
-      setAlert(alert.message);
+    const handleSubmit = e => {
+        e.preventDefault()
+        signup(user.email, user.password, user.fullName, user.photoURL)
     }
-  };
 
   return (
     <>
@@ -55,21 +42,24 @@ const SignUp = () => {
                         <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                           Registro
                         </p>
-                        <form className="mx-1 mx-md-4" onSubmit={handleSubmit}>
+                        {/* {alert && <p>{alert}</p>} */}
+                        <form 
+                            className="mx-1 mx-md-4"
+                            onSubmit={handleSubmit}
+                        >
                           {/* SE DEJAN DIVS PARA CONSTRUCCION */}
-                          {/* <div className="d-flex flex-row align-items-center mb-4">
+                          <div className="d-flex flex-row align-items-center mb-4">
                           <BsFillPersonFill className="me-1 mb-4"/>
                           <div className="form-outline flex-fill mb-0">
                             <input 
                               type="text" 
                               id="nombre" 
                               className="form-control"
-                              value={nombre}
-                              onChange={e => setNombre(e.target.value)}
+                              onChange={dataUser}
                               />
                             <label className="form-label" htmlFor="nombre">Tu Nombre</label>
                           </div>
-                        </div> */}
+                        </div>
                           <div className="d-flex flex-row align-items-center mb-4">
                             <MdEmail className="me-1 mb-4" />
                             <div className="form-outline flex-fill mb-0">
@@ -81,7 +71,7 @@ const SignUp = () => {
                                 name="email"
                                 className="form-control"
                                 placeholder="Ej: tunombre@correo.com"
-                                onChange={handleChange}
+                                onChange={dataUser}
                               />
                             </div>
                           </div>
@@ -96,7 +86,7 @@ const SignUp = () => {
                                 name="password"
                                 className="form-control"
                                 placeholder="Minimo 6 caracteres"
-                                onChange={handleChange}
+                                onChange={dataUser}
                               />
                             </div>
                           </div>
@@ -117,7 +107,7 @@ const SignUp = () => {
                             <button
                               type="submit"
                               className="btn btn-primary btn-lg"
-                              // onClick={handleSubmit}
+                              onClick={dataUser}
                             >
                               Registrar
                             </button>
@@ -143,4 +133,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;

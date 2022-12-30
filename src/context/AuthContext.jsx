@@ -11,6 +11,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+
 import { auth } from "../services/firebase/firebaseConfig";
 
 export const AuthContext = createContext();
@@ -21,18 +22,17 @@ export const useAuth = () => {
 };
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null)
   const navigate = useNavigate()
 
   const MySwal = withReactContent(Swal)
 
-  const signup = async (data) => {
+  const signup = async (email, password, fullName, photoURL) => {
     try {
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(auth.currentUser, {
-        displayName: data.fullName,
-        photoURL: data.photoURL,
+        displayName: fullName,
+        photoURL: photoURL,
       });
       MySwal.fire({
         title: "Registrado!",
@@ -42,82 +42,140 @@ export function AuthProvider({ children }) {
       });
       setTimeout(() => {
         Swal.close();
-        navigate(`/login`);
+        navigate('/login');
       }, 2000);
     } catch (error) {
-      console.log(error)
       if (error.code === "auth/email-already-in-use") {
         MySwal.fire({
           title: "Error!",
           footer:
-            "El correo electrónico ya está registrado. Intenta registrarte nuevamente.",
+            "El correo electrónico ya está registrado. Intenta registrarte con otro correo.",
           icon: "error",
-          showConfirmButton: false,
+          showConfirmButton: true,
         });
     } else if (error.code) {
         MySwal.fire({
-          title: "Hubo un error!",
+          title: "Hubo un error! La contraseña debe tener minimo 6 caracteres",
           footer: "Por favor, intenta registrarte nuevamente.",
           icon: "error",
-          showConfirmButton: false,
+          showConfirmButton: true,
         });
       }
     }
   };
 
-  const login = async (data) => {
+  const login = async (email, password, photoURL, fullName) => {
     try {
       const userCredentials = await signInWithEmailAndPassword(
         auth,
-        data.email,
-        data.password,
-        data.photoURL,
-        data.fullName
+        email,
+        password,
+        photoURL,
+        fullName
       );
       MySwal.fire({
-        title: `¡Bienvenido ${userCredentials.user.displayName}!`,
-        footer: "A continuación serás dirigido al home.",
+        title: `¡Hola ${userCredentials.user.displayName}!`,
+        footer: "Yendo a inicio....",
         icon: "success",
         showConfirmButton: false,
       });
       setTimeout(() => {
         Swal.close();
-        navigate(`/`);
+        navigate('/');
       }, 2000);
     } catch (error) {
-      console.log(error);
+      if (error.code === "auth/user-not-found") {
+        MySwal.fire({
+          title: "Hubo un error!",
+          footer:
+            "El correo no existe. Intenta nuevamente.",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      } else if (error.code === "auth/wrong-password") {
+        MySwal.fire({
+          title: "Hubo un error!",
+          footer: "Contraseña incorrecta, intenta nuevamente.",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      }
     }
   };
 
-  const logout = () => {
-    signOut(auth);
+  const logout = async () => {
+    await signOut(auth);
+    MySwal.fire({
+      title: "¡Cerraste Sesión!",
+      footer: "Regresa cuando quieras",
+      padding: "2em",
+      color: "#000000",
+      backdrop: `
+          #bb480066
+          url("https://i.ibb.co/ZK5dSsb/nyan-cat.gif")
+          left top
+          no-repeat
+        `,
+      showConfirmButton: false,
+    });
+    setTimeout(() => {
+      Swal.close();
+      navigate('/login');
+    }, 2500);
   };
 
   const loginGoogle = async () => {
     try {
       const googleProvider = new GoogleAuthProvider();
-      await signInWithPopup(auth, googleProvider);
-      return;
+      const userCredentials = await signInWithPopup(auth, googleProvider);
+      MySwal.fire({
+        title: `¡Hola ${userCredentials.user.displayName}!`,
+        footer: "Yendo a inicio....",
+        icon: "success",
+        showConfirmButton: false,
+      });
+      setTimeout(() => {
+        Swal.close();
+        navigate('/');
+      }, 2000);
+      
     } catch (error) {
-      console.log(error);
+      if (error.code === "auth/account-exists-with-different-credential") {
+        MySwal.fire({
+          title: "Hubo un error!",
+          footer:
+            "Ese correo ya existe. Intenta nuevamente.",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      } else {
+        MySwal.fire({
+          title: "Hubo un error!",
+          footer: "Intenta nuevamente.",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      }
     }
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
+    onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser)
     });
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        signup,
-        login,
         user,
+        login,
         logout,
-        loading,
+        signup,
         loginGoogle,
       }}
     >
