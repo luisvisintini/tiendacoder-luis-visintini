@@ -1,11 +1,20 @@
 
+import { useEffect } from "react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../context/AuthContext";
+import SpinnerKit from "../Spinner/SpinnerKit";
 
 const Login = () => {
 
+  const [loading, setLoading] = useState(true)
   const { login, loginGoogle } = useAuth()
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 500);
+  }, [])
 
     const [user, setUser] = useState({
         email: "",
@@ -21,6 +30,10 @@ const Login = () => {
     const handleSubmit = e => {
         e.preventDefault()
         login(user.email, user.password, user.fullName)
+    }
+
+    if(loading) {
+      return <SpinnerKit />
     }
 
   return (

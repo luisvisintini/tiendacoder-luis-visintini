@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useAuth } from "../../context/AuthContext";
 import { BsFillPersonFill } from 'react-icons/bs'
+import SpinnerKit from "../Spinner/SpinnerKit";
+
 const Register = () => {
+    const [loading, setLoading] = useState(true)
     const { signup } = useAuth()
+
+    useEffect(() => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }, []);
 
     const [user, setUser] = useState({
         email: "",
@@ -23,6 +32,10 @@ const Register = () => {
     const handleSubmit = e => {
         e.preventDefault()
         signup(user.email, user.password, user.fullName, user.photoURL)
+    }
+
+    if(loading) {
+        return <SpinnerKit />
     }
 
   return (
