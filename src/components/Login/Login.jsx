@@ -1,9 +1,10 @@
-
+import logo from "../../logoAdamssvg.svg";
 import { useEffect } from "react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../context/AuthContext";
 import SpinnerKit from "../Spinner/SpinnerKit";
+import { Link } from "react-router-dom";
 
 const Login = () => {
 
@@ -41,7 +42,7 @@ const Login = () => {
       <div className="container mt-5 text-center text-lg-start">
         <div className="card mb-3">
           <div className="row g-0 d-flex align-items-center">
-            <h2 className="text-center mt-3 fw-bold">Iniciar Sesión</h2>
+            <h2 className="text-center mt-3 fw-bold"> <img src={logo} width={100} alt="Adams Vape logo"/>Iniciar Sesión</h2>
             <div className="col-lg-4 d-none d-lg-flex">
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/tiendacoder-e55f2.appspot.com/o/vape1.jpg?alt=media&token=d622dd5e-77a9-4b4d-aca7-0ad3caff2e0e"
@@ -78,6 +79,10 @@ const Login = () => {
                       placeholder="Minimo 6 caracteres"
                       onChange={dataUser}
                     />
+                  </div>
+
+                  <div className="col mb-3">
+                    <Link to='/register'>No tienes cuenta? Registrate</Link>
                   </div>
 
                   <button 
