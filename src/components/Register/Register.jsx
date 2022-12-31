@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Alert from "../Alert/Alert";
-import SpinnerKit from "../Spinner/SpinnerKit";
 import { BsFillPersonFill } from 'react-icons/bs'
 const Register = () => {
     const { signup } = useAuth()
@@ -52,8 +49,8 @@ const Register = () => {
                           <BsFillPersonFill className="me-1 mb-4"/>
                           <div className="form-outline flex-fill mb-0">
                             <input 
-                              type="text" 
-                              id="nombre" 
+                              type="text"
+                              name="fullName" 
                               className="form-control"
                               onChange={dataUser}
                               />

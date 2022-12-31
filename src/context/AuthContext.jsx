@@ -24,7 +24,7 @@ export const useAuth = () => {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
-
+  
   const MySwal = withReactContent(Swal)
 
   const signup = async (email, password, fullName, photoURL) => {
@@ -64,13 +64,12 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const login = async (email, password, photoURL, fullName) => {
+  const login = async (email, password, fullName) => {
     try {
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         email,
         password,
-        photoURL,
         fullName
       );
       MySwal.fire({
@@ -128,8 +127,8 @@ export function AuthProvider({ children }) {
 
   const loginGoogle = async () => {
     try {
-      const googleProvider = new GoogleAuthProvider();
-      const userCredentials = await signInWithPopup(auth, googleProvider);
+      const provider = new GoogleAuthProvider();
+      const userCredentials = await signInWithPopup(auth, provider);
       MySwal.fire({
         title: `¡Hola ${userCredentials.user.displayName}!`,
         footer: "Yendo a inicio....",
@@ -164,8 +163,12 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser)
+    onAuthStateChanged(auth, async (user) => {
+      if(user) {
+        setUser(user)
+      } else {
+        setUser()
+      }
     });
   }, []);
 

@@ -10,8 +10,7 @@ const Login = () => {
     const [user, setUser] = useState({
         email: "",
         password: "",
-        fullName: "",
-        photoURL: ""
+        fullName: ""
       });
     const dataUser = e => {
         setUser({
@@ -19,10 +18,9 @@ const Login = () => {
           [e.target.name]: e.target.value
         })
       }
-
     const handleSubmit = e => {
         e.preventDefault()
-        login(user.email, user.password, user.fullName, user.photoURL)
+        login(user.email, user.password, user.fullName)
     }
 
   return (
@@ -42,20 +40,7 @@ const Login = () => {
               <div className="card-body py-5 px-md-5">
                 <form 
                   onSubmit={handleSubmit}
-                >
-                  <div className="form-outline mb-4">
-                    <label className="form-label" htmlFor="fullName">
-                      Nombre
-                    </label>
-                    <input
-                      type="text"
-                      name="fullName"
-                      className="form-control"
-                      placeholder="Tu nombre"
-                      onChange={dataUser}
-                    />
-                  </div>
-
+                > 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="email">
                       Email
